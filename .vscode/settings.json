@@ -1,0 +1,7 @@
+{
+    "django.snippets.exclude": [
+        "cms",
+        "wagtail"
+    ],
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": false
+}
