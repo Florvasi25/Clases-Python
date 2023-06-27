@@ -1,0 +1,10 @@
+.titulo{
+    color: red;
+    background-color: blue;
+}
+
+p{
+    display: flex;
+    flex-direction: row;
+    background-color: red;
+}
