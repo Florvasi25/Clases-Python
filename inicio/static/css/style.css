@@ -1,10 +1,7 @@
-.titulo{
-    color: red;
+.nav {
     background-color: blue;
 }
 
-p{
-    display: flex;
-    flex-direction: row;
-    background-color: red;
+.titulo {
+    background-color: green;
 }

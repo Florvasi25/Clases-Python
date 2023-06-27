@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block tab_title %}
+        <title>Base Template</title>
+        {% endblock tab_title %}       
+        <link rel="stylesheet" href={% static 'css/style.css' %}>
+    </head>
+    <body>
+        <nav class='nav'>
+            <div>
+                <h1>SOY EL NAV</h1>
+                <a href={% url 'inicio:inicio' %}>INICIO</a>
+                <a href={% url 'inicio:prueba' %}>PRUEBA</a>
+            </div>
+        </nav>
+
+        {% block crear_perro %}
+        {% endblock crear_perro %}
+
+        <footer class='footer'>
+            <div>
+                <p>SOY EL FOOTER</p>
+            </div>
+        </footer>
+    </body>
+    </html>
