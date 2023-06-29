@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.template import Template, Context, loader
 from datetime import datetime
 from inicio.models import Perro
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from inicio.form import CrearPerroFormulario, BuscarPerroFormulario
 
 #v1
 # def inicio(request):
@@ -42,6 +43,9 @@ from django.shortcuts import render
 #     return HttpResponse(renderizar_template)
 
 #v4
+def inicio(request):
+    return render(request, 'inicio/inicio.html')
+
 def prueba(request):
     segundos = datetime.now().second
     diccionario = {
@@ -79,13 +83,66 @@ def segunda_vista(request):
 #     return HttpResponse(renderizar_template)
 
 #v2
-def crear_perro(request, nombre, edad):
-    perro = Perro(nombre=nombre, edad=edad)
-    perro.save()
-    diccionario = {
-        'perro': perro
-    }
-    return render(request, 'inicio/crear_perro.html', diccionario)
+# def crear_perro(request, nombre, edad):
+#     perro = Perro(nombre=nombre, edad=edad)
+#     perro.save()
+#     diccionario = {
+#         'perro': perro
+#     }
+#     return render(request, 'inicio/crear_perro.html', diccionario)
 
-def inicio(request):
-    return render(request, 'inicio/inicio.html')
+#v3
+# def crear_perro(request):
+#     diccionario = {}
+
+#     if request.method == 'POST':
+#         perro = Perro(nombre=request.POST['nombre'], edad=request.POST['edad'])
+#         perro.save()
+#         diccionario['perro'] = perro
+
+#     return render(request, 'inicio/crear_perro.html', diccionario)
+
+#v4
+# def crear_perro(request):
+#     diccionario = {}
+
+#     if request.method == 'POST':
+#         formulario = CrearPerroFormulario(request.POST)
+#         if formulario.is_valid():
+#             info = formulario.cleaned_data
+#             perro = Perro(nombre=info['nombre'], edad=info['edad'])
+#             perro.save()
+#             diccionario['perro'] = perro
+#             return render(request, 'inicio/perro.html', diccionario)
+#         else:
+#             diccionario['formulario'] = formulario
+#             return render(request, 'inicio/crear_perro.html', diccionario)
+
+#     formulario = CrearPerroFormulario()
+#     diccionario['formulario'] = formulario
+#     return render(request, 'inicio/crear_perro.html', diccionario)
+
+# v5
+def crear_perro(request):
+
+    if request.method == 'POST':
+        formulario = CrearPerroFormulario(request.POST)
+        if formulario.is_valid():
+            info = formulario.cleaned_data
+            perro = Perro(nombre=info['nombre'], edad=info['edad'])
+            perro.save()
+            return redirect('inicio:listar_perros')
+        else:
+            return render(request, 'inicio/crear_perros.html', {'formulario': formulario})
+
+    formulario = CrearPerroFormulario()
+    return render(request, 'inicio/crear_perros.html', {'formulario': formulario})
+
+def listar_perros(request):
+    formulario = BuscarPerroFormulario(request.GET)
+    if formulario.is_valid():
+        nombre_a_buscar = formulario.cleaned_data['nombre']
+    listado_de_perros = Perro.objects.filter(nombre__icontains=nombre_a_buscar)
+    
+    formulario = BuscarPerroFormulario()
+    return render(request, 'inicio/listar_perros.html', {'formulario': formulario, 'perros': listado_de_perros, 'busqueda': nombre_a_buscar})

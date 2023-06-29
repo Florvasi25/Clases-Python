@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% comment %} {% block tab_title %}
+<title>Nuevo Perro</title>
+{% endblock tab_title %}
+
+{% block contenido %}
+    {% if perro %}
+            <h1>Se creó un perro llamado {{perro.nombre}} que tiene {{perro.edad}} años</h1>
+    {% endif %}
+{% endblock contenido %} {% endcomment %}
+
+{% block tab_title %}
+<title>Perros</title>
+{% endblock tab_title %}
+
+{% block contenido %}
+    <h1>Listado Perros</h1>
+    <button><a href={% url 'inicio:crear_perro' %}>CREAR PERRO</a></button>
+    <form action="" method="get">
+        {{formulario}}
+        <button>Buscar</button>
+    </form>
+    {% if perros %}
+    {% for perro in perros %}
+    <li>Nombre: {{perro.nombre}} - Edad: {{perro.edad}}</li>
+    {% endfor %}
+    {% else %}
+    <p>no se encontró "{{busqueda}}" en los datos cargados.</p>
+    {% endif %}
+{% endblock contenido %}

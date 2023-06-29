@@ -1,7 +1,19 @@
 .nav {
-    background-color: blue;
+    background-color: yellow;
 }
 
-.titulo {
-    background-color: green;
+.tituloinicio {
+    background-color: violet;
+}
+
+.tituloprueba{
+    background-color: pink;
+}
+
+.tituloperro{
+    background-color: blueviolet;
+}
+
+.footer{
+    background-color: yellow;
 }

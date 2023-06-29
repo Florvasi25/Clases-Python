@@ -15,11 +15,12 @@
                 <h1>SOY EL NAV</h1>
                 <a href={% url 'inicio:inicio' %}>INICIO</a>
                 <a href={% url 'inicio:prueba' %}>PRUEBA</a>
+                <a href={% url 'inicio:listar_perros' %}>PERROS</a>
             </div>
         </nav>
 
-        {% block crear_perro %}
-        {% endblock crear_perro %}
+        {% block contenido %}
+        {% endblock contenido %}
 
         <footer class='footer'>
             <div>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block tab_title %}
+<title>Crear Perro</title>
+{% endblock tab_title %}
+
+{% block contenido %}
+    <div>
+        <h1 class="tituloperro">CREAR PERRO</h1>
+    </div>
+    <div>
+        <form action="" method='POST'>
+            {% csrf_token %}
+            {% comment %} <p>
+                Nombre:<input type="text" name='nombre'>
+            </p>
+            <p>
+                Edad:<input type="number" name='edad'>
+            </p> {% endcomment %}
+            {{formulario}}
+            <button>Crear</button>
+        </form>
+    </div>
+{% endblock contenido %}
+
