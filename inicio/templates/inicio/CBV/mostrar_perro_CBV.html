@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block tab_title %}
+<title>Perro</title>
+{% endblock tab_title %}
+
+{% block contenido %}
+    <div>
+        <h1 class="tituloperro">{{perro.nombre}}</h1>
+    </div>
+    <div>
+        <li>Edad: {{perro.edad}}</li>
+        <li>Descripción: {{perro.descripcion}}</li>
+    </div>
+{% endblock contenido %}
+

@@ -10,8 +10,15 @@ urlpatterns = [
     #v1
     # path('crear-perro/<str:nombre>/<int:edad>/', views.crear_perro),
     #v2
-    path('perros/', views.listar_perros, name='listar_perros'),
-    path('perros/crear/', views.crear_perro, name='crear_perro'),
-    path('perros/eliminar/<int:perro_id>/', views.eliminar_perro, name='eliminar_perro'),
-    path('perros/modificar/<int:perro_id>/', views.modificar_perro, name='modificar_perro'),
+    # path('perros/', views.listar_perros, name='listar_perros'),
+    # path('perros/crear/', views.crear_perro, name='crear_perro'),
+    # path('perros/eliminar/<int:perro_id>/', views.eliminar_perro, name='eliminar_perro'),
+    # path('perros/modificar/<int:perro_id>/', views.modificar_perro, name='modificar_perro'),
+    
+    #CBV
+    path('perros/', views.ListarPerros.as_view(), name='listar_perros'),
+    path('perros/crear/', views.CrearPerro.as_view(), name='crear_perro'),
+    path('perros/eliminar/<int:pk>/', views.EliminarPerro.as_view(), name='eliminar_perro'),
+    path('perros/modificar/<int:pk>/', views.ModificarPerro.as_view(), name='modificar_perro'),
+    path('perros/<int:pk>/', views.MostrarPerro.as_view(), name='mostrar_perro'),
 ]

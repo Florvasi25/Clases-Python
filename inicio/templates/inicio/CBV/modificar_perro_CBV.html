@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block tab_title %}
+<title>Modificar Perro</title>
+{% endblock tab_title %}
+
+{% block contenido %}
+    <div>
+        <h1 class="tituloperro">MODIFICAR PERRO</h1>
+    </div>
+    <div>
+        <form action={% url 'inicio:modificar_perro' perro.id %} method='POST'>
+            {% csrf_token %}
+            <table>
+                {{form}}
+            </table>
+            <button>Modificar</button>
+        </form>
+    </div>
+{% endblock contenido %}
+
