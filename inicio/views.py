@@ -3,7 +3,7 @@ from django.template import Template, Context, loader
 from datetime import datetime
 from inicio.models import Perro
 from django.shortcuts import render, redirect
-from inicio.form import CrearPerroFormulario, BuscarPerroFormulario
+from inicio.form import CrearPerroFormulario, BuscarPerroFormulario, ModificarPerroFormulario
 
 #v1
 # def inicio(request):
@@ -46,21 +46,21 @@ from inicio.form import CrearPerroFormulario, BuscarPerroFormulario
 def inicio(request):
     return render(request, 'inicio/inicio.html')
 
-def prueba(request):
-    segundos = datetime.now().second
-    diccionario = {
-        'mensaje': 'Este es el mensaje de inicio...',
-        'segundos': segundos,
-        'segundo_par': segundos%2 == 0,
-        'segundo_redondo': segundos%10 == 0,
-        'listado_de_numeros': list(range(25)),
-    }
+# def prueba(request):
+#     segundos = datetime.now().second
+#     diccionario = {
+#         'mensaje': 'Este es el mensaje de inicio...',
+#         'segundos': segundos,
+#         'segundo_par': segundos%2 == 0,
+#         'segundo_redondo': segundos%10 == 0,
+#         'listado_de_numeros': list(range(25)),
+#     }
 
-    return render(request, 'inicio/prueba.html', diccionario)
+#     return render(request, 'inicio/prueba.html', diccionario)
 
 
-def segunda_vista(request):
-    return HttpResponse('<h1>Soy la segunda vista</h1>')
+# def segunda_vista(request):
+#     return HttpResponse('<h1>Soy la segunda vista</h1>')
 
 #v1
 # def crear_perro(request, nombre, edad):
@@ -146,3 +146,28 @@ def listar_perros(request):
     
     formulario = BuscarPerroFormulario()
     return render(request, 'inicio/listar_perros.html', {'formulario': formulario, 'perros': listado_de_perros, 'busqueda': nombre_a_buscar})
+
+def eliminar_perro(request, perro_id):
+
+    perro = Perro.objects.get(id=perro_id)
+    perro.delete()
+
+    return redirect('inicio:listar_perros')
+
+def modificar_perro(request, perro_id):
+    perro_a_modificar = Perro.objects.get(id=perro_id)
+
+    if request.method == 'POST':
+        formulario = ModificarPerroFormulario(request.POST)
+        if formulario.is_valid():
+            info = formulario.cleaned_data
+            perro_a_modificar.nombre = info['nombre']
+            perro_a_modificar.edad = info['edad']
+            perro_a_modificar.save()
+            return redirect('inicio:listar_perros')
+        else:
+            return  render(request, 'inicio/modificar_perro.html', {'formulario': formulario})
+    
+    formulario = ModificarPerroFormulario(initial={'nombre': perro_a_modificar.nombre, 'edad': perro_a_modificar.edad})
+    return render(request, 'inicio/modificar_perro.html', {'formulario': formulario})
+
