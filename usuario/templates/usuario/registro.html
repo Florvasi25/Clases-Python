@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block tab_title %}
+<title>Registrarse</title>
+{% endblock tab_title %}
+
+{% block contenido %}
+    <div>
+        <h1 class="tituloperro">REGISTRO</h1>
+    </div>
+    <div>
+        <form action={% url 'usuario:registrarse' %} method='POST'>
+            {% csrf_token %}
+            <table>
+                {{formulario}}
+            </table>
+            <button>Registrar</button>
+        </form>
+    </div>
+{% endblock contenido %}
+

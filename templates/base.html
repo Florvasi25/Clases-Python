@@ -16,7 +16,7 @@
                 <button>
                     <a href={% url 'inicio:inicio' %}>INICIO</a>
                 </button>
-                {% comment %} <a href={% url 'inicio:prueba' %}>PRUEBA</a> {% endcomment %}
+                <a href={% url 'inicio:prueba' %}>PRUEBA</a>
                 <button>
                     <a href={% url 'inicio:listar_perros' %}>PERROS</a>
                 </button>
@@ -28,6 +28,9 @@
                 {% else %}
                     <button>
                         <a href={% url 'usuario:login' %}>LOGIN</a>
+                    </button>
+                    <button>
+                        <a href={% url 'usuario:registrarse' %}>REGISTRARSE</a>
                     </button>
                 {% endif %}
             </div>
