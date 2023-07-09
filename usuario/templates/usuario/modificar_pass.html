@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block tab_title %}
+<title>Modificar Pass</title>
+{% endblock tab_title %}
+
+{% block contenido %}
+    <div>
+        <h1 class="tituloperro">Modificar Pass</h1>
+    </div>
+    <div>
+        <form action={% url 'usuario:modificar_pass' %} method='POST'>
+            {% csrf_token %}
+            <table>
+                {{form}}
+            </table>
+            <button>Modificar</button>
+        </form>
+    </div>
+{% endblock contenido %}
+
