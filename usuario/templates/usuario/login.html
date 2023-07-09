@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block tab_title %}
+<title>Login</title>
+{% endblock tab_title %}
+
+{% block contenido %}
+    <div>
+        <h1 class="tituloperro">LOGIN</h1>
+    </div>
+    <div>
+        <form action={% url 'usuario:login' %} method='POST'>
+            {% csrf_token %}
+            <table>
+                {{formulario}}
+            </table>
+            <button>Login</button>
+        </form>
+    </div>
+{% endblock contenido %}
+
